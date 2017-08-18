@@ -1,0 +1,23 @@
+.img-start{
+	border: 5px solid green;
+}
+
+button{
+	padding-top: 5px;
+	padding-right: 0px;
+	padding-bottom: 5px;
+	padding-left: 0px;
+}
+
+.img-oppo{
+	border: 5px solid yellow;
+}
+
+.img-fighter{
+	border: 5px solid red;
+}
+
+img{
+	height:100px;
+	width:100px;
+}

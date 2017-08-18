@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Stars Wars RPG</title>
+
+<!-- Reset CSS -->
+<link rel="stylesheet" href="assets\css\reset.css">
+
+<!-- My Style CSS -->
+<link rel="stylesheet" type="text/css" href="assets\css\style.css">
+
+<!-- Bootstrap Link -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Jquery Link -->
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div class = "container">
+	<div class = "row">
+
+		<div class = "col-md-offset-2 col-md-8">
+			
+			<div class = "pick-here text-center">
+				<h1> Choose Wisely </h1>
+
+				<!-- <button class="clearGame">CLEAR</button> -->
+
+				<button class = "img-start" data-status = "unselected" data-health = "100" data-damage = "10"><p>Johnny Cage</p><img  src="assets\images\johnny.png"><p>110 HP</p></button>
+				
+				<button class = "img-start" data-status = "unselected" data-health = "200" data-damage = "15"><p>Raiden</p><img src="assets\images\raiden.png"><p>200 HP</p></button>
+				
+				<button class = "img-start" data-status = "unselected" data-health = "250" data-damage = "20"><p>Scorpion</p><img src="assets\images\scorpion.png"><p>250 HP</p></button>
+				
+				<button class = "img-start" data-status = "unselected" data-health = "300" data-damage = "25"><p>Subzero</p><img src="assets\images\subzero.png"><p>300 HP</p></button>
+			</div>
+		
+		</div>
+	</div>
+</div>
+
+<div class = "container">
+	<div class = "row">
+		
+		<div class = "col-md-4">
+				<h2>Your Player</h2>
+			<div class = "attacker">
+				<div class = "myPlayer-health"></div>
+			</div>
+		</div>
+
+		<div class = "col-md-4">
+				<h2>Pick your opposition</h2>
+			<div class ="oppo-remain">
+			</div>
+		</div>
+		
+		<div class = "col-md-4">
+			<h2>Your Opponent</h2>
+			<div class = "pcPlayer-health"></div>
+			<div class = "defenders">	
+				
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div class = "container">
+	<div class = "row">
+		<div class = "col-md-offset-5 col-md-2">
+
+			<div class = "attack-button">
+			</div>
+			<div class = "my-action">
+			</div>
+			<div class = "oppo-action">
+			</div>
+
+		</div>
+	</div>
+</div>	
+
+
+
+
+
+
+
+<!-- JQUERY Script Link-->
+<script src="assets\javascript\game.js" type="text/javascript"></script>
+
+
+</body>
+</html>
