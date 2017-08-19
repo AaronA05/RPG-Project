@@ -82,8 +82,11 @@ $(document).ready(function(){
 				if(bothChosen){
 					$(".attack-button").html("<button>FIGHT!</button>"); 
 				}//if both have been chosen show the attack button
+
 			} //if defender not chosen
+
 		}); //unselected opposition on click function
+		
 	}); //unselected on click function
  
 	$(".attack-button").on("click", function(){
@@ -96,17 +99,19 @@ $(document).ready(function(){
 
 		if(defenderHealth <= 0 && numberDefeated < 3){
 			$(".defenders").empty();
+			//this causes next image selection to go to defender div
 			defenderChosen = false;
-			alert("Pick a new fighter");
+			bothChosen = false;
 			numberDefeated++;
+			alert("Pick a new fighter");
 			if (numberDefeated === 3){
 				$(".col-md-4").empty();
 				$(".attack-button").empty();
 				$(".my-action").empty();
 				$(".oppo-action").empty();
 				$(".next-game").html("<h2> YOU WIN, HIT RESET FOR NEW GAME</h2>");
-			}
-
+			}//if all defeated display winning message
+			
 		}//if defender health goes below 0 pick another defender
 		else if(attackerHealth <= 0){
 			alert("You lost!");
