@@ -17,30 +17,26 @@ var defenderImpact = 0;
 var attackerChosen = false;
 var defenderChosen = false;
 var bothChosen = false;
+var numberDefeated = 0;
+var attackerImpactStart = 0;
 
 function attackSequence(){
-	attackerImpact = 10;
+	attackerImpact += attackerImpactStart;
 	attackerHealth -= defenderImpact;
 	defenderHealth -= attackerImpact;
 }
 
-// function clearGame(){
-// 	var attackerHealth = 0;
-// 	var defenderHealth = 0;
-// 	var attackerImpact = 0;
-// 	var defenderImpact = 0;
-// 	var attackerChosen = false;
-// 	var defenderChosen = false;
-// 	var bothChosen = false;
-// 	$(".attacker").empty();
-// 	$(".oppo-remain").empty();
-// 	$(".defenders").empty();
-// }
+
+$(".clearGame").on("click", function(){
+	location.reload();
+});
 
 $(document).ready(function(){
-	// $(".clearGame").on("click", function(){
-	// 	clearGame();
-	// });
+	//Gets Link for Theme Song
+      var audioElement = document.createElement("audio");
+      audioElement.setAttribute("src", "assets/mortalkombat.mp3");
+      audioElement.play();
+     
 
 	//Whatever image is selected first goes to user selection ATTACKER area
 	$('[data-status="unselected"]').on("click", function(){
@@ -52,9 +48,8 @@ $(document).ready(function(){
 			$(myPlayer).attr("data-status", "selected");
 			//set attacker fight options
 			attackerHealth = parseInt($(myPlayer).attr("data-health"));
-			attackerImpact = parseInt($(myPlayer).attr("data-damage"));
+			attackerImpactStart = parseInt($(myPlayer).attr("data-damage"));
 			$(".myPlayer-health").html("<p>Health: " + attackerHealth + "</p>");
-			console.log(attackerHealth);
 			//change attackerChosen to true
 			attackerChosen = true;
 			//push the rest of options to pick into opposition area and change status
@@ -63,7 +58,8 @@ $(document).ready(function(){
 			//change border of all opposition choices
 			$('[data-status="oppo"]').removeClass("img-start").addClass("img-oppo");
 
-		}
+		} //if attacker not chosen function
+	
 	
 	//now in the opposition choices area if clicked moved to defender area
 		$("[data-status='oppo']").on("click", function(){
@@ -85,59 +81,45 @@ $(document).ready(function(){
 				bothChosen = true;
 				if(bothChosen){
 					$(".attack-button").html("<button>FIGHT!</button>"); 
-				}
-			}
-		});
-
-
-
-	}); 
-
-
+				}//if both have been chosen show the attack button
+			} //if defender not chosen
+		}); //unselected opposition on click function
+	}); //unselected on click function
+ 
 	$(".attack-button").on("click", function(){
 		attackSequence();
 		$(".myPlayer-health").html("<p>Health: " + attackerHealth + "</p>");
 		$(".pcPlayer-health").html("<p>Health: " + defenderHealth + "</p>");
-		$(".my-action").html("<p>You attacked for " + attackerImpact + " damage</p>");
-		$(".oppo-action").html("<p>They attacked you for  " + defenderImpact + " damage</p>");
+		$(".my-action").html("<p>You caused " + attackerImpact + " damage</p>");
+		$(".oppo-action").html("<p>Your opponent caused  " + defenderImpact + " damage</p>");
 
 
-		if(attackerHealth <= 0){
-			alert("You LOSE!");
-		}
-
-		if(defenderHealth <= 0){
+		if(defenderHealth <= 0 && numberDefeated < 3){
 			$(".defenders").empty();
 			defenderChosen = false;
 			alert("Pick a new fighter");
+			numberDefeated++;
+			if (numberDefeated === 3){
+				$(".col-md-4").empty();
+				$(".attack-button").empty();
+				$(".my-action").empty();
+				$(".oppo-action").empty();
+				$(".next-game").html("<h2> YOU WIN, HIT RESET FOR NEW GAME</h2>");
+			}
 
-			$("[data-status='on-hold']").on("click", function(){
-				//only move the first one clicked to defender area
-				if(!defenderChosen){
-					//take user choice and push to defender area
-					var pcPlayer = this;
-					$(".defenders").append(pcPlayer);
-					$(pcPlayer).attr("data-status", "pcPlayer2")
-					//change fighter border to red 
-					$('[data-status="pcPlayer2"]').removeClass("img-oppo").addClass("img-fighter");
-					//set the opposition main information
-					defenderHealth = parseInt($(pcPlayer).attr("data-health"));
-					defenderImpact = parseInt($(pcPlayer).attr("data-damage"));
-					$(".pcPlayer-health").html("<p>Health: " + defenderHealth + "</p>");
-					//change remaining players status to keep them separate
-					$('[data-status="on-hold"]').attr("data-status", "on-hold2");
-					defenderChosen = true;
-					bothChosen = true;
-					if(bothChosen){
-						$(".attack-button").html("<button>FIGHT!</button>"); 
-					}
-				}
-			});
-		}
+		}//if defender health goes below 0 pick another defender
+		else if(attackerHealth <= 0){
+			alert("You lost!");
+			$(".attack-button").empty();
+			$(".next-game").html("<h2>Try again! Hit the reset button</h2>");
 
-	});
+		}//if attacker health goes below 0
+		
 
+		
+	});//attack button on click event
 	
-	
-}); //document on ready function
 
+
+});
+	
